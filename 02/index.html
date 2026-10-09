@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>02 / Site Structure</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <main class="page-shell">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">02</p>
+                    <h1>site structure</h1>
+                </div>
+                <span class="status-pill">self study / build</span>
+            </header>
+
+            <section class="hero panel">
+                <div class="hero-copy">
+                    <p class="label">layout blueprint</p>
+                    <h2>ページを組み立てる骨格を、変数と枠で見える化する。</h2>
+                    <p class="lead">
+                        ここは自分用の実装メモ。<br />
+                        すべての div には枠を持たせて、どこが何を担当しているかを視覚的に確認できるようにする。
+                    </p>
+                </div>
+                <div class="hero-visual" aria-label="site structure diagram">
+                    <div class="frame shell">page shell</div>
+                    <div class="frame header">topbar</div>
+                    <div class="frame nav">nav</div>
+                    <div class="frame main">main</div>
+                    <div class="frame aside">sidebar</div>
+                    <div class="frame content">content</div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="label">component map</p>
+                        <h3>設計の枠</h3>
+                    </div>
+                </div>
+                <div class="structure-grid" id="structure-grid"></div>
+            </section>
+
+            <section class="panel motion-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="label">motion detail</p>
+                        <h3>アニメーションの軌道</h3>
+                    </div>
+                </div>
+
+                <div class="motion-board">
+                    <div class="path-wrap" aria-label="motion path preview">
+                        <div class="path-line"></div>
+                        <div class="path-dot dot-1"></div>
+                        <div class="path-dot dot-2"></div>
+                        <div class="path-dot dot-3"></div>
+                    </div>
+                    <div class="motion-steps">
+                        <div class="step">
+                            <span class="step-index">01</span>
+                            <div>
+                                <strong>Start</strong>
+                                <small>translateY(12px)</small>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-index">02</span>
+                            <div>
+                                <strong>Reach</strong>
+                                <small>easeOutCubic 420ms</small>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-index">03</span>
+                            <div>
+                                <strong>Settle</strong>
+                                <small>opacity 1 / scale 1</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const structures = [
+                {
+                    name: "page-shell",
+                    purpose: "全体の骨格。左右の余白と最大幅を保つ",
+                    tag: ["layout", "max-width", "padding"],
+                    snippet: `<div class="page-shell">\n  <header class="topbar"></header>\n  <main></main>\n</div>`
+                },
+                {
+                    name: "topbar",
+                    purpose: "サイト名とナビゲーションの固定ヘッダー",
+                    tag: ["header", "flex", "sticky"],
+                    snippet: `<header class="topbar">\n  <div class="brand">Site</div>\n  <nav>...</nav>\n</header>`
+                },
+                {
+                    name: "hero panel",
+                    purpose: "案内文と視覚的な紹介を並べる第一画面",
+                    tag: ["split", "copy", "preview"],
+                    snippet: `<section class="hero panel">\n  <div class="hero-copy">...</div>\n  <div class="hero-visual">...</div>\n</section>`
+                },
+                {
+                    name: "component map",
+                    purpose: "設計中のコンポーネント群を可視化する一覧",
+                    tag: ["grid", "cards", "label"],
+                    snippet: `<section class="panel">\n  <div class="structure-grid">...</div>\n</section>`
+                },
+                {
+                    name: "motion board",
+                    purpose: "アニメーションの段階と軌道を明確に見せる",
+                    tag: ["timeline", "path", "ease"],
+                    snippet: `<div class="motion-board">\n  <div class="path-wrap"></div>\n  <div class="motion-steps">...</div>\n</div>`
+                },
+                {
+                    name: "card frame",
+                    purpose: "情報の塊をラップして、クリック可能な大きめの枠を作る",
+                    tag: ["border", "radius", "hover"],
+                    snippet: `<article class="struct-card">\n  <header>...</header>\n  <div class="code-block">...</div>\n</article>`
+                }
+            ];
+
+            const grid = document.getElementById("structure-grid");
+
+            structures.forEach((item) => {
+                const card = document.createElement("article");
+                card.className = "struct-card";
+                card.tabIndex = 0;
+                card.setAttribute("role", "button");
+                card.setAttribute("aria-expanded", "false");
+
+                const header = document.createElement("header");
+                header.className = "card-header";
+                header.innerHTML = `
+                    <div>
+                        <p class="mini-label">${item.tag[0]}</p>
+                        <h4>${item.name}</h4>
+                    </div>
+                    <span class="toggle-mark">+</span>
+                `;
+
+                const body = document.createElement("div");
+                body.className = "card-body";
+                body.innerHTML = `
+                    <p>${item.purpose}</p>
+                    <div class="tag-row">
+                        ${item.tag.map((tag) => `<span>${tag}</span>`).join("")}
+                    </div>
+                `;
+
+                const codeBox = document.createElement("pre");
+                codeBox.className = "code-block";
+                codeBox.hidden = true;
+                codeBox.textContent = item.snippet;
+
+                card.append(header, body, codeBox);
+                grid.appendChild(card);
+
+                const toggle = () => {
+                    const open = !card.classList.contains("open");
+                    card.classList.toggle("open", open);
+                    card.setAttribute("aria-expanded", String(open));
+                    codeBox.hidden = !open;
+                    header.querySelector(".toggle-mark").textContent = open ? "−" : "+";
+                };
+
+                card.addEventListener("click", toggle);
+                card.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        toggle();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

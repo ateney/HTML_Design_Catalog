@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>01 / 配色表</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <main class="page-shell">
+            <header class="page-header">
+                <p class="eyebrow">01</p>
+                <h1>配色表</h1>
+                <p class="description">
+                    汎用として使いやすい配色を、50件ほど縦に並べた一覧。
+                </p>
+            </header>
+
+            <ul class="palette-list" id="palette-list" aria-label="配色表"></ul>
+        </main>
+
+        <script>
+            const palette = [
+                { name: "Warm Ivory", base: "#F3EFE8", secondary: "#DCCCB4", accent: "#D97A56", detail: "#171310" },
+                { name: "Pearl Gray", base: "#E9E5E0", secondary: "#D7C9EE", accent: "#6E5B8D", detail: "#2C2C2C" },
+                { name: "Cloud Mist", base: "#F5F7F8", secondary: "#C9E6FF", accent: "#2D5D8B", detail: "#4C4C4C" },
+                { name: "Bone White", base: "#F2E8DD", secondary: "#F4B67A", accent: "#7F2F29", detail: "#171310" },
+                { name: "Sand Beige", base: "#DCCCB4", secondary: "#F7C8AE", accent: "#B96C4E", detail: "#4E3A32" },
+                { name: "Tea Smoke", base: "#C5B7A0", secondary: "#C7CFB7", accent: "#58725C", detail: "#2C2C2C" },
+                { name: "Cinnamon", base: "#B67852", secondary: "#F3EFE8", accent: "#9A4C32", detail: "#171310" },
+                { name: "Terracotta", base: "#D97A56", secondary: "#F4D6CF", accent: "#7F2F29", detail: "#171310" },
+                { name: "Rust Ink", base: "#9A4C32", secondary: "#F2E8DD", accent: "#171310", detail: "#F3EFE8" },
+                { name: "Burnt Clay", base: "#7F2F29", secondary: "#E7C9C1", accent: "#F4B67A", detail: "#F5F7F8" },
+                { name: "Rose Dust", base: "#E7C9C1", secondary: "#F7F3F1", accent: "#8C4E67", detail: "#2C2C2C" },
+                { name: "Blush Pink", base: "#F4D6CF", secondary: "#F7F3F1", accent: "#C26B6A", detail: "#4C4C4C" },
+                { name: "Petal Rose", base: "#E7A7A7", secondary: "#F4D6CF", accent: "#8C4E67", detail: "#171310" },
+                { name: "Rosewood", base: "#C26B6A", secondary: "#F3EFE8", accent: "#4E3A32", detail: "#F5F7F8" },
+                { name: "Mulberry", base: "#8C4E67", secondary: "#E8DFF5", accent: "#6E5B8D", detail: "#F7F3F1" },
+                { name: "Lilac Mist", base: "#E8DFF5", secondary: "#F5F7F8", accent: "#8D7BB7", detail: "#2C2C2C" },
+                { name: "Lavender Haze", base: "#D7C9EE", secondary: "#E8DFF5", accent: "#6FAED8", detail: "#171310" },
+                { name: "Soft Violet", base: "#B9A4D7", secondary: "#DDEEFF", accent: "#8D7BB7", detail: "#171310" },
+                { name: "Wisteria", base: "#8D7BB7", secondary: "#F5F7F8", accent: "#2D5D8B", detail: "#F3EFE8" },
+                { name: "Plum Bloom", base: "#6E5B8D", secondary: "#E7C9C1", accent: "#4E3A32", detail: "#F3EFE8" },
+                { name: "Sky Blue", base: "#DDEEFF", secondary: "#F5F7F8", accent: "#6FAED8", detail: "#2D5D8B" },
+                { name: "Ice Blue", base: "#C9E6FF", secondary: "#DDF7F4", accent: "#2D5D8B", detail: "#171310" },
+                { name: "Soft Horizon", base: "#A8D2F0", secondary: "#F5F7F8", accent: "#6FAED8", detail: "#4C4C4C" },
+                { name: "Lake Blue", base: "#6FAED8", secondary: "#E9E5E0", accent: "#2D5D8B", detail: "#F3EFE8" },
+                { name: "Deep Sea", base: "#2D5D8B", secondary: "#DDEEFF", accent: "#A8D2F0", detail: "#F7F3F1" },
+                { name: "Aqua Glass", base: "#DDF7F4", secondary: "#F5F7F8", accent: "#77B79A", detail: "#2C2C2C" },
+                { name: "Mint Calm", base: "#C9F2E3", secondary: "#F7F3F1", accent: "#3E6D5B", detail: "#171310" },
+                { name: "Seafoam", base: "#9BD8C4", secondary: "#DDF7F4", accent: "#3E6D5B", detail: "#171310" },
+                { name: "Moss Green", base: "#77B79A", secondary: "#C7CFB7", accent: "#58725C", detail: "#F3EFE8" },
+                { name: "Forest Pine", base: "#3E6D5B", secondary: "#F3EFE8", accent: "#B5C7A7", detail: "#F7F3F1" },
+                { name: "Olive Dust", base: "#C7CFB7", secondary: "#F8E7B1", accent: "#58725C", detail: "#171310" },
+                { name: "Sage Mist", base: "#B5C7A7", secondary: "#F5F7F8", accent: "#8DA07D", detail: "#2C2C2C" },
+                { name: "Moss Gray", base: "#8DA07D", secondary: "#F5F7F8", accent: "#3E6D5B", detail: "#F3EFE8" },
+                { name: "Fir Green", base: "#58725C", secondary: "#C7CFB7", accent: "#F8E7B1", detail: "#171310" },
+                { name: "Honey Glow", base: "#F8E7B1", secondary: "#F3EFE8", accent: "#D9A850", detail: "#171310" },
+                { name: "Buttery Gold", base: "#E9C76F", secondary: "#F8E7B1", accent: "#B96C4E", detail: "#171310" },
+                { name: "Amber Light", base: "#D9A850", secondary: "#F4B67A", accent: "#9A4C32", detail: "#F3EFE8" },
+                { name: "Apricot", base: "#F4B67A", secondary: "#F7C8AE", accent: "#D3846D", detail: "#171310" },
+                { name: "Citrus Peel", base: "#E7A25C", secondary: "#F8E7B1", accent: "#B96C4E", detail: "#2C2C2C" },
+                { name: "Sunset Coral", base: "#F39A7E", secondary: "#F7C8AE", accent: "#9A4C32", detail: "#F3EFE8" },
+                { name: "Peach Fizz", base: "#F7C8AE", secondary: "#F3EFE8", accent: "#D3846D", detail: "#171310" },
+                { name: "Warm Clay", base: "#D3846D", secondary: "#F4D6CF", accent: "#7F2F29", detail: "#F3EFE8" },
+                { name: "Copper Leaf", base: "#B96C4E", secondary: "#F8E7B1", accent: "#4E3A32", detail: "#F7F3F1" },
+                { name: "Charcoal", base: "#2C2C2C", secondary: "#D7C9EE", accent: "#F3EFE8", detail: "#F7F3F1" },
+                { name: "Ink Gray", base: "#4C4C4C", secondary: "#E9E5E0", accent: "#6FAED8", detail: "#F5F7F8" },
+                { name: "Slate", base: "#6A6F7A", secondary: "#DDEEFF", accent: "#2D5D8B", detail: "#F7F3F1" },
+                { name: "Stone Blue", base: "#717F8F", secondary: "#C9E6FF", accent: "#6E5B8D", detail: "#F3EFE8" },
+                { name: "Pale Taupe", base: "#D4C5BA", secondary: "#F7F3F1", accent: "#4E3A32", detail: "#171310" },
+                { name: "Mocha Foam", base: "#B69D8E", secondary: "#F3EFE8", accent: "#4E3A32", detail: "#F3EFE8" },
+                { name: "Espresso", base: "#4E3A32", secondary: "#D4C5BA", accent: "#F8E7B1", detail: "#F7F3F1" },
+                { name: "Porcelain", base: "#F7F3F1", secondary: "#E8DFF5", accent: "#8D7BB7", detail: "#171310" },
+                { name: "Mist Lilac", base: "#E5E1F2", secondary: "#F5F7F8", accent: "#6E5B8D", detail: "#171310" },
+                { name: "Dusty Blue", base: "#B7C9DA", secondary: "#DDEEFF", accent: "#2D5D8B", detail: "#171310" },
+                { name: "Soft Teal", base: "#A8D7D7", secondary: "#F5F7F8", accent: "#3E6D5B", detail: "#171310" }
+            ];
+
+            const list = document.getElementById("palette-list");
+
+            palette.forEach(({ name, base, secondary, accent, detail }) => {
+                const item = document.createElement("li");
+                item.className = "palette-item";
+                item.setAttribute("tabindex", "0");
+                item.setAttribute("role", "button");
+                item.setAttribute("aria-expanded", "false");
+
+                const swatches = document.createElement("div");
+                swatches.className = "swatches";
+
+                const baseSwatch = document.createElement("span");
+                baseSwatch.className = "swatch large";
+                baseSwatch.style.background = base;
+                baseSwatch.setAttribute("aria-label", `${name} ベース ${base}`);
+
+                const triplet = document.createElement("div");
+                triplet.className = "triplet";
+
+                [
+                    ["secondary", secondary],
+                    ["accent", accent],
+                    ["detail", detail]
+                ].forEach(([role, hex]) => {
+                    const chip = document.createElement("span");
+                    chip.className = `chip ${role}`;
+                    chip.style.background = hex;
+                    chip.title = `${name} ${role}`;
+                    chip.setAttribute("aria-label", `${name} ${role} ${hex}`);
+                    triplet.appendChild(chip);
+                });
+
+                const meta = document.createElement("div");
+                meta.className = "meta";
+
+                const label = document.createElement("div");
+                label.className = "name-line";
+
+                const nameEl = document.createElement("span");
+                nameEl.className = "name";
+                nameEl.textContent = name;
+
+                const code = document.createElement("span");
+                code.className = "code";
+                code.textContent = base;
+
+                label.append(nameEl, code);
+
+                const legend = document.createElement("div");
+                legend.className = "legend";
+                legend.innerHTML = '<span>base</span><span>accent</span><span>detail</span>';
+
+                const sample = document.createElement("div");
+                sample.className = "sample-panel";
+                sample.hidden = true;
+
+                const sampleStage = document.createElement("div");
+                sampleStage.className = "sample-stage";
+
+                [
+                    { label: "背景白", bg: "#ffffff", fg: detail, accentText: detail, panel: base, soft: secondary },
+                    { label: "背景黒", bg: "#121212", fg: "#f5f5f5", accentText: "#ffffff", panel: detail, soft: accent }
+                ].forEach(({ label, bg, fg, accentText, panel, soft }) => {
+                    const surface = document.createElement("div");
+                    surface.className = "sample-surface";
+                    surface.style.background = bg;
+
+                    const card = document.createElement("div");
+                    card.className = "sample-card";
+                    card.style.background = `linear-gradient(135deg, ${panel} 0%, ${soft} 100%)`;
+
+                    const sampleHeader = document.createElement("div");
+                    sampleHeader.className = "sample-header";
+                    sampleHeader.innerHTML = '<span class="sample-dots"><i style="background:#f56b5d"></i><i style="background:#f2c76c"></i><i style="background:#7fc98c"></i></span><span class="sample-tag" style="color:' + fg + ';">' + label + '</span>';
+
+                    const sampleBody = document.createElement("div");
+                    sampleBody.className = "sample-body";
+                    sampleBody.innerHTML = `
+                        <div class="sample-title" style="background:${accent}; color:${accentText};">${name}</div>
+                        <div class="sample-row">
+                            <span class="sample-pill" style="background:${fg}; color:${bg};">text</span>
+                            <span class="sample-pill soft" style="background:${secondary}; color:${detail};">button</span>
+                        </div>
+                    `;
+
+                    card.append(sampleHeader, sampleBody);
+                    surface.append(card);
+                    sampleStage.append(surface);
+                });
+
+                sample.append(sampleStage);
+                meta.append(label, legend, triplet, sample);
+                swatches.append(baseSwatch, triplet);
+                item.append(swatches, meta);
+
+                item.addEventListener("click", () => {
+                    const willOpen = !item.classList.contains("is-open");
+                    item.classList.toggle("is-open", willOpen);
+                    item.setAttribute("aria-expanded", String(willOpen));
+                    sample.hidden = !willOpen;
+                });
+
+                item.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        item.click();
+                    }
+                });
+
+                list.appendChild(item);
+            });
+        </script>
+    </body>
+</html>
