@@ -1,102 +1,183 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#f4f3ef" />
-        <title>04 / Light &amp; Dark Toggle</title>
-        <link rel="stylesheet" href="index.css" />
-        <script src="index.js" defer></script>
-    </head>
-    <body data-theme="light">
-        <main class="page-showcase">
-            <section class="menu-showcase" aria-label="メニューアイコンのアニメーション見本">
-                <div class="menu-group" aria-label="ハンバーガーメニュー">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f3ef" />
+    <title>04 / アニメーションボタン</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+</head>
+<body data-theme="light">
+    <svg class="icon-defs" aria-hidden="true" focusable="false">
+        <defs>
+            <g id="icon-sun">
+                <circle cx="12" cy="12" r="4.1" fill="currentColor" />
+                <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+                    <line x1="12" y1="2.6" x2="12" y2="5.1" />
+                    <line x1="12" y1="18.9" x2="12" y2="21.4" />
+                    <line x1="2.6" y1="12" x2="5.1" y2="12" />
+                    <line x1="18.9" y1="12" x2="21.4" y2="12" />
+                    <line x1="5.4" y1="5.4" x2="7.1" y2="7.1" />
+                    <line x1="16.9" y1="16.9" x2="18.6" y2="18.6" />
+                    <line x1="16.9" y1="7.1" x2="18.6" y2="5.4" />
+                    <line x1="5.4" y1="18.6" x2="7.1" y2="16.9" />
+                </g>
+            </g>
+            <path id="icon-moon" d="M20.6 13.4A8.4 8.4 0 1 1 10.6 3.4a6.7 6.7 0 0 0 10 10Z" fill="currentColor" />
+        </defs>
+    </svg>
+
+    <main class="page-shell">
+        <header class="page-header">
+            <p class="eyebrow">04 / アニメーションボタン</p>
+            <h1>メニューアイコンとテーマトグル</h1>
+            <p class="lead">クリックで開閉・明暗が切り替わります。CSSだけで動くパターン見本。</p>
+        </header>
+
+        <section class="showcase" aria-labelledby="heading-menu">
+            <h2 class="section-title" id="heading-menu">ハンバーガーメニュー</h2>
+
+            <div class="control-grid">
+                <figure class="control">
                     <button class="menu-button menu-button--cross" type="button" data-name="クロス">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>クロス</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--arrow" type="button" data-name="矢印">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>矢印</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--spin" type="button" data-name="回転">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>回転</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--collapse" type="button" data-name="折りたたみ">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>折りたたみ</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--plus" type="button" data-name="プラス">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
-                </div>
-                <div class="menu-group" aria-label="三点メニュー">
+                    <figcaption>プラス</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--dots-cross" type="button" data-name="三点クロス">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
-                    <button class="menu-button menu-button--dots-stack" type="button" data-name="三点縦並び">
+                    <figcaption>三点クロス</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="menu-button menu-button--dots-stack" type="button" data-name="三点収束">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>三点収束</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--dots-expand" type="button" data-name="三点拡大">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
+                    <figcaption>三点拡大</figcaption>
+                </figure>
+                <figure class="control">
                     <button class="menu-button menu-button--dots-bars" type="button" data-name="三本線">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
-                    <button class="menu-button menu-button--dots-triangle" type="button" data-name="三角形">
+                    <figcaption>三本線</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="menu-button menu-button--dots-orbit" type="button" data-name="三点旋回">
                         <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
                     </button>
-                </div>
-            </section>
-            <section class="theme-showcase" aria-label="ライトモード・ダークモード切替ボタン">
-            <button class="theme-toggle theme-toggle--orb" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--pill" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--split" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--square" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--outline" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--sunset" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--vertical" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--soft" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--neon" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-            <button class="theme-toggle theme-toggle--minimal" type="button" aria-label="ダークモードに切り替え">
-                <span class="theme-sun" aria-hidden="true">☀</span>
-                <span class="theme-moon" aria-hidden="true">☾</span>
-                <span class="theme-thumb" aria-hidden="true"></span>
-            </button>
-        </main>
-    </body>
+                    <figcaption>三点旋回</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="showcase" aria-labelledby="heading-theme">
+            <h2 class="section-title" id="heading-theme">テーマトグル</h2>
+
+            <div class="control-grid">
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--fade" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>フェード</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--spin" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>回転</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--sink" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>沈み</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--slide" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>スライド</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--flip" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>反転</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--divide" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>半分</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--shrink" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>収縮</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--minimal" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>ミニマル</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--ring" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>リング</figcaption>
+                </figure>
+                <figure class="control">
+                    <button class="theme-toggle theme-toggle--vertical" type="button" aria-label="ダークモードに切り替え">
+                        <span class="theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-sun" /></svg></span>
+                        <span class="theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-moon" /></svg></span>
+                    </button>
+                    <figcaption>縦</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
